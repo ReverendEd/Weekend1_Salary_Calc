@@ -21,9 +21,24 @@ function clickHandler(){
 }//handles click events
 
 function submitEmployee(){
-    let enteredEmployee = new Employee($('#firstName').val(), $('#lastName').val(), $('#idNumber').val(), $('#jobTitle').val(), $('#annualSalary').val());
-    addToDom(enteredEmployee);
-    employeeList.push(enteredEmployee);
+    if ($('#firstName').val()!=''&& $('#lastName').val()!= ''&& $('#idNumber').val()!=''&& $('#jobTitle').val()!=''&& $('#annualSalary').val()!='') {
+        let enteredEmployee = new Employee($('#firstName').val(), $('#lastName').val(), $('#idNumber').val(), $('#jobTitle').val(), $('#annualSalary').val());
+        addToDom(enteredEmployee);
+        employeeList.push(enteredEmployee);
+        $('#firstName').attr('placeholder', 'Insert First Name');
+        $('#lastName').attr('placeholder', 'Insert Last Name');
+        $('#idNumber').attr('placeholder', 'Insert ID');
+        $('#jobTitle').attr('placeholder', 'Insert Job Title');
+        $('#annualSalary').attr('placeholder', 'Insert Annual Salary');
+    }
+    else{ //notifies you which fields need to have more information in order to create new employee.
+        console.log('not enough information');
+        $('#firstName').attr('placeholder', 'missing information');
+        $('#lastName').attr('placeholder', 'missing information');
+        $('#idNumber').attr('placeholder', 'missing information');
+        $('#jobTitle').attr('placeholder', 'missing information');
+        $('#annualSalary').attr('placeholder', 'missing information');
+    }
 }//creates new employee, sends it to addToDom function and pushes new employee to employee array
 
 function addToDom(employee){
@@ -36,7 +51,7 @@ function addToDom(employee){
     $row.append('<td>'+employee.jobTitle+'</td>');
     $row.append('<td>'+employee.annualSalary+'</td>');
     $row.append('<td><button class="delete">delete employee</button></td>');
-    $('button').data('salary', employee.annualSalary);
+    //$('button').data('salary', employee.annualSalary);
     dataArray.push(employee.annualSalary);//pushes annualSalary to the dataarray
     $('#tablebody').append($row); //adds above elements to table row element within the $row variable then appends them to tablebody
     monthlyCost += (parseInt(employee.annualSalary)/12);
@@ -81,10 +96,10 @@ function pageReady(){
 } 
 
 function displayMonthlyCost(){
-    if (monthlyCost<1) {
+    if (monthlyCost<.01) {
         monthlyCost=0;
     }
     $('#monthlyCost').empty();;
-    $('#monthlyCost').append('Monthly Costs: $'+monthlyCost);
+    $('#monthlyCost').append('Monthly Costs: $'+monthlyCost.toFixed(2));
 }//checks if monthlyCost is a small number < 1 and sets it to 0 if it is
 //then empties the monthly cost value at the bottom and appends the new value.
