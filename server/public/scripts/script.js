@@ -103,3 +103,12 @@ function displayMonthlyCost(){
     $('#monthlyCost').append('Monthly Costs: $'+monthlyCost.toFixed(2));
 }//checks if monthlyCost is a small number < 1 and sets it to 0 if it is
 //then empties the monthly cost value at the bottom and appends the new value.
+
+
+
+//notes
+//shouldve deleted employees that were deleted from the array as well
+//shouldve used the array to calculate the monthly cost
+//therefore, whenever an employee was deleted from the array, and monthly cost can be recalculated and redisplayed
+//without the need for all these crazy variable craps
+//use .data with data-id="'data'" in the html section
